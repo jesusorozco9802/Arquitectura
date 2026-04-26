@@ -1,0 +1,468 @@
+<!DOCTYPE html5>
+<html lang="es-MX">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa Ventura - Portal Web</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      background: #0D0326;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    /* HEADER con gradiente */
+    header {
+      background: linear-gradient(135deg, #97b8ff, #120336);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    /* MAIN layout */
+    main {
+      width: 95%;
+      /* Ocupa casi todo el ancho de la página */
+      margin: 50px auto 40px;
+      padding: 0 20px;
+    }
+
+    /* ARTÍCULOS */
+    article {
+      background: #97b8ff;
+      color: #0D0326;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    article h2 {
+      margin: 0 0 10px;
+      color: #0D0326;
+    }
+
+    article p {
+      text-align: justify;
+      /* Justifica el texto */
+      font-size: 18px;   /* tamaño de letra más grande */
+      line-height: 2;
+      /* Espaciado cómodo */
+    }
+
+
+
+    /* TARJETAS resumen */
+    .tarjetas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin: 40px 0;
+      justify-content: center;
+    }
+
+    .tarjeta {
+      background: white;
+      border: 2px solid #97b8ff;
+      border-radius: 12px;
+      padding: 25px;
+      width: 260px;
+      text-align: center;
+      color: #333;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .tarjeta h3 {
+      color: #120336;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #120336;
+      color: #7AF0FF;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 4px solid #97b8ff;
+    }
+
+    .img-izquierda {
+      float: left;
+      margin: 0 20px 20px 0;
+      border-radius: 8px;
+      border: 2px solid #97b8ff;
+    }
+
+    .img-derecha {
+      float: right;
+      margin: 0 0 20px 20px;
+      border-radius: 8px;
+      border: 2px solid #97b8ff;
+    }
+
+    .img-abajo {
+      display: block;
+      margin: 20px auto;
+      border-radius: 8px;
+      border: 2px solid #97b8ff;
+    }
+    .imagenes-centro {
+  display: flex;              /* activa flexbox */
+  justify-content: center;    /* centra horizontalmente */
+  gap: 20px;                  /* espacio entre imágenes */
+  margin: 20px 0;
+}
+
+.imagenes-centro img {
+  width: 250px;               /* tamaño uniforme */
+  border-radius: 8px;
+  border: 2px solid #97b8ff;
+  cursor: pointer;
+}
+
+
+    .concepto-imagenes {
+      display: flex;
+      text-align: center; 
+      /* centra las imágenes */
+      gap: 30px;
+      /* espacio entre ellas */
+      margin-top: 15px;
+    }
+
+    .concepto-imagenes img {
+      width: 250px;
+      /* tu tamaño manual */
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+
+    /* Zoom al pasar el cursor */
+    img {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-contenido {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .cerrar {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+
+    /* Responsivo: en móviles las imágenes se apilan */
+    @media (max-width: 768px) {
+
+      .img-izquierda,
+      .img-derecha {
+        float: none;
+        display: block;
+        margin: 20px auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Casa Ventura: Una casa que escucha a la tierra</h1>
+    <p>Obra de Tatiana Bilbao · Monterrey, Nuevo León</p>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <article id="introduccion">
+      <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/1.jpeg" alt="Vista general Casa Ventura"
+        class="img-izquierda" onclick="abrirModal(this)" width="220">
+      <h2>Introducción</h2>
+      <p>Casa Ventura, diseñada por la arquitecta mexicana Tatiana Bilbao, es una vivienda unifamiliar
+        ubicada en una ladera boscosa de Monterrey, Nuevo León, México. Concebida como una
+        residencia para una familia numerosa, la obra representa una de las exploraciones más claras
+        de la arquitecta en torno a la relación entre arquitectura, paisaje y habitar. Lejos de imponerse
+        sobre el terreno, la vivienda se adapta a la pendiente y se integra al entorno natural mediante
+        una composición fragmentada que responde tanto a la topografía como a las dinámicas de la
+        vida doméstica.<br>
+        Casa Ventura no se concibe como un objeto aislado colocado sobre el sitio, sino como una
+        arquitectura que emerge del paisaje y se desarrolla con él. Su valor arquitectónico reside en la
+        capacidad de transformar las condiciones complejas del terreno en una estrategia espacial
+        sensible, donde la geometría, la materialidad y el recorrido construyen una experiencia de
+        habitar profundamente ligada al lugar. </p>
+    </article>
+
+    <article id="obra">
+      <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/2.jpeg" alt="Vista general Casa Ventura"
+        class="img-derecha" onclick="abrirModal(this)" width="240">
+      <h2>Sobre la obra</h2>
+      <p>Casa Ventura fue proyectada sobre un terreno accidentado, con una fuerte pendiente y una
+        densa presencia vegetal. Esta condición inicial definió por completo la lógica del proyecto. En
+        lugar de modificar agresivamente el sitio para implantar una vivienda convencional, la
+        propuesta responde al paisaje mediante una estrategia de adaptación, donde la casa se
+        fragmenta en una serie de volúmenes que descienden con la montaña.
+      </p>
+      <br>
+      <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/3.jpeg" alt="Vista general Casa Ventura"
+        class="img-izquierda" onclick="abrirModal(this)" width="240">
+      <p>
+        La vivienda fue concebida como un sistema de piezas conectadas que se acomodan
+        progresivamente sobre la ladera. Esta organización no solo permite una mejor adaptación al
+        terreno, sino que también genera una experiencia espacial dinámica, donde cada volumen
+        establece una relación particular con la luz, el paisaje y el programa. De esta manera, el
+        recorrido interior se convierte en una secuencia continua entre espacios abiertos, cerrados,
+        contenidos y panorámicos.
+      </p>
+      <br>
+    </article>
+
+    <article id="concepto">
+      <h2>Concepto arquitectónico</h2>
+      <p>El concepto central de Casa Ventura parte de una idea fundamental: construir una vivienda
+        que no se imponga sobre la montaña, sino que crezca desde ella. Tatiana Bilbao plantea una
+        arquitectura que se adapta al terreno y utiliza la topografía como una herramienta activa de
+        diseño, permitiendo que el proyecto se desarrolle en continuidad con el paisaje natural.</p>
+        <div class="imagenes-centro">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/4.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/5.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/6.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+  </div>
+      <p>
+        Esta idea se traduce en una composición fragmentada basada en módulos pentagonales que
+        se articulan entre sí para formar una estructura flexible. La elección de esta geometría rompe
+        con la rigidez de la planta ortogonal tradicional y permite una mayor libertad para orientar
+        visuales, abrir espacios, controlar la entrada de luz y responder a las irregularidades del
+        terreno. Cada módulo se ajusta sutilmente según su posición, generando una vivienda que se
+        expande de manera orgánica sobre la ladera.
+      </p>
+    </article>
+
+    <article id="contexto">
+      <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/7.jpeg" alt="Vista general Casa Ventura"
+        class="img-izquierda" onclick="abrirModal(this)" width="220">
+      <h2>Relación con el contexto</h2>
+      <p>Uno de los aspectos más relevantes del proyecto es su estrecha relación con el contexto
+        natural. Casa Ventura no elimina el paisaje para construirse, sino que lo incorpora como parte
+        esencial de la experiencia arquitectónica. La vivienda se inserta entre la vegetación existente,
+        se abre hacia el bosque y aprovecha la pendiente para organizar sus espacios en distintos
+        niveles.
+      </p>
+
+      <p>La implantación del proyecto responde directamente a las condiciones del sitio. Las áreas
+        sociales se ubican en zonas más abiertas y accesibles, mientras que los espacios privados se
+        desplazan sobre la pendiente en una secuencia más íntima y resguardada. Esta disposición
+        permite que cada parte de la vivienda establezca una relación específica con el entorno,
+        generando distintas atmósferas dentro de una misma casa. </p>
+    </article>
+
+    <article id="organizacion">
+      <h2>Organización espacial</h2>
+      <p>La organización espacial de Casa Ventura responde a una lógica clara de distribución
+        programática. Los espacios públicos se articulan como áreas de convivencia abiertas y
+        conectadas visualmente con terrazas, patios y vistas panorámicas. En contraste, las áreas
+        privadas se agrupan en una secuencia más contenida, organizada a lo largo del descenso
+        natural del terreno.
+      </p>
+<div class="imagenes-centro">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/8.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/9.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/10.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+  </div>
+      <p>Uno de los elementos más significativos del proyecto es la circulación. La vivienda se recorre
+        de manera progresiva, siguiendo la pendiente del sitio y articulando sus distintos niveles a
+        través de una escalera helicoidal iluminada cenitalmente. Más que un elemento funcional,
+        esta escalera se convierte en el núcleo espacial de la casa, conectando sus diferentes
+        volúmenes y reforzando la continuidad del recorrido.</p>
+    </article>
+
+
+<article id="logica">
+  <h2>Lógica del crecimiento</h2>
+  <p>Las plantas arquitectónicas de Casa Ventura revelan la lógica con la que el proyecto se despliega sobre la ladera. La organización en planta no responde a una composición rígida o simétrica, sino a un sistema fragmentado que se adapta a las condiciones del terreno y a las necesidades del programa. Cada volumen se articula con el siguiente, generando una secuencia espacial que permite a la vivienda crecer de forma gradual y orgánica.</p>
+  
+  <div class="imagenes-centro">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/11.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/12.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+  </div>
+
+  <p>La lectura de las plantas permite comprender cómo la geometría pentagonal organiza la vivienda desde una lógica flexible. Los espacios no se distribuyen de manera convencional, sino como piezas conectadas que responden a visuales, orientaciones y relaciones específicas con el paisaje. Esta estrategia convierte a la planta en una herramienta de adaptación y no solo de distribución funcional.</p>
+</article>
+
+<article id="implantacion">
+  <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/13.jpeg" alt="Vista general Casa Ventura"
+        class="img-derecha" onclick="abrirModal(this)" width="400">
+  <h2>Implantación general</h2>
+  <p>La implantación general muestra cómo la vivienda se posa sobre la ladera sin violentar la topografía. Su disposición escalonada permite reducir el impacto sobre el terreno y conservar la relación directa con la vegetación y las visuales del entorno.</p>
+<br>
+</article>
+
+<article id="nivel">
+  <h2>Nivel social</h2>
+  <p>El nivel social concentra las áreas de convivencia común, como sala, comedor y terrazas. Su disposición favorece la apertura visual y la relación continua entre interior y exterior.</p>
+  <h2>Nivel privado</h2>
+  <p>El nivel privado agrupa los espacios de descanso y uso íntimo. Su ubicación sobre la pendiente permite una relación más contenida con el paisaje y una mayor privacidad.</p>
+</article>
+
+    <article id="materialidad">
+      <h2>Materialidad</h2>
+      <p>La materialidad de Casa Ventura responde tanto a criterios estructurales como sensoriales. El
+        concreto aparente constituye el material predominante del proyecto, otorgándole una
+        presencia sólida, tectónica y profundamente vinculada con la condición mineral del sitio. Su
+        uso no solo resuelve la estructura de la vivienda, sino que también refuerza la idea de una
+        arquitectura que emerge de la montaña como una prolongación del terreno.<br>
+        La madera utilizada en el interior de paredes, estanterías y baldosas del suelo ofrece un
+        contraste cálido y natural con las superficies lisas de hormigón.</p>
+
+        <div class="imagenes-centro">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/14.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/15.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+  </div>
+  
+      <p>Este carácter masivo se equilibra con grandes superficies acristaladas que permiten abrir
+        visualmente la vivienda hacia el paisaje. El vidrio introduce luz natural, enmarca vistas y diluye
+        el límite entre interior y exterior, generando un balance entre solidez y transparencia, refugio y
+        apertura.
+      </p>
+    </article>
+
+    <article id="luz">
+      <br>
+      
+      <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/16.jpeg" alt="Vista general Casa Ventura"
+        class="img-izquierda" onclick="abrirModal(this)" width="180">
+        <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/17.jpeg" alt="Vista general Casa Ventura"
+        class="img-derecha" onclick="abrirModal(this)" width="180">
+      <h2>Luz y atmósfera</h2>
+      <p>En Casa Ventura, la luz natural no solo cumple una función utilitaria, sino que construye
+        atmósferas. Cada abertura ha sido cuidadosamente orientada para controlar el ingreso de luz,
+        enmarcar vistas específicas y modificar la percepción espacial del interior a lo largo del día. </p>
+      
+      <p>La luz entra, se refleja sobre el concreto y se filtra a través del vidrio, produciendo interiores
+        cambiantes que intensifican la relación entre arquitectura y paisaje. Esta condición convierte
+        a la experiencia doméstica en una relación constante con el tiempo, el clima y el entorno
+        natural.
+      </p>
+      <br>
+    </article>
+
+    <article id="valor">
+      <h2>Valor arquitectónico</h2>
+      <p>Casa Ventura representa una de las obras residenciales más significativas de Tatiana Bilbao
+        por su capacidad de sintetizar paisaje, geometría y vida doméstica en una misma operación
+        arquitectónica. El proyecto demuestra que una vivienda puede responder a condiciones
+        topográficas complejas sin renunciar a la claridad formal, al confort espacial ni a una
+        experiencia sensible del habitar. </p>
+      
+      <p>Más que una casa implantada en la montaña, Casa Ventura es una arquitectura que se deja
+        moldear por ella. Su valor reside en la precisión con la que interpreta el territorio y en la manera
+        en que transforma el paisaje en estructura, recorrido y experiencia.
+      </p>
+<div class="imagenes-centro">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/18.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+    <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/2.jpeg" 
+         alt="Vista general Casa Ventura" onclick="abrirModal(this)">
+  </div>
+    </article>
+
+    <article id="conclusion">
+      <h2>Conclusión</h2>
+      <img src="C:/Users/ferna/OneDrive/Documentos/arquitectura/20.jpeg" alt="Vista general Casa Ventura"
+        class="img-derecha" onclick="abrirModal(this)" width="400">
+      <p>Casa Ventura expresa con claridad la postura arquitectónica de Tatiana Bilbao: una
+        arquitectura sensible al contexto, profundamente vinculada con el paisaje y centrada en la
+        experiencia humana del habitar. A través de una composición fragmentada, una implantación
+        cuidadosa y una materialidad honesta, la vivienda transforma las limitaciones del terreno en
+        oportunidades espaciales.
+        
+        No se trata únicamente de una casa construida sobre una ladera, sino de una arquitectura que
+        entiende el sitio como materia activa del proyecto. En Casa Ventura, el paisaje no funciona
+        como telón de fondo, sino como la estructura misma a partir de la cual la arquitectura nace,
+        se organiza y crece.</p>
+
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+  <p>© 2026 Proyecto académico · Casa Ventura</p>
+  <p>Autor: Janeth Meza</p>
+  <p><a href="#" style="color:#7AF0FF;">Términos</a> | <a href="#" style="color:#7AF0FF;">Privacidad</a></p>
+</footer>
+
+
+  <div id="modal" class="modal">
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+    <img class="modal-contenido" id="imagenModal" alt="Imagen ampliada de Casa Ventura">
+  </div>
+
+  <script>
+    function abrirModal(img) {
+      var modal = document.getElementById("modal");
+      var modalImg = document.getElementById("imagenModal");
+      modal.style.display = "block";
+      modalImg.src = img.src;
+    }
+    function cerrarModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
+
+</body>
+
+</html>
